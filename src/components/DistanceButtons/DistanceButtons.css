@@ -1,0 +1,14 @@
+.distanceButtonsCardHeight{
+    height: 380.133px;
+}
+
+.buttonGroup{
+    padding-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button5k{
+    padding-top: 20px;
+}
