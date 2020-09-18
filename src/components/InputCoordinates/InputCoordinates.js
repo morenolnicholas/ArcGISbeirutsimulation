@@ -1,5 +1,5 @@
 import React from 'react';
-import {useForm} from "react-hook-form";
+import {useForm} from "react-hook-form/dist/index.ie11";
 import "./InputCoordinates.css";
 import Button from 'calcite-react/Button';
 import TextField from 'calcite-react/TextField';
