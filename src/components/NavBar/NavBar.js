@@ -56,7 +56,7 @@ const NavBar = (props) => {
                 <CalciteP>
                     "On 4 August 2020, a large amount of ammonium nitrate stored at the port of the city of Beirut,
                     the capital of Lebanon, exploded, causing at least 200 deaths, 3 reported missing, 6,500 injuries,
-                    US$10–15 billion in property damage, and leaving an estimated 300,000 people homeless.[1][2] Around 2,750 tonnes of
+                    US$10–15 billion in property damage, and leaving an estimated 300,000 people homeless. Around 2,750 tonnes of
                     the substance (equivalent to around 1.1 kilotons of TNT) had been stored in a warehouse without proper safety measures for
                     the previous six years, after having been confiscated by the Lebanese authorities from the abandoned ship MV Rhosus.
                     The explosion was preceded by a fire in the same warehouse, but as of September 2020, the exact cause of the detonation is still under investigation. "
