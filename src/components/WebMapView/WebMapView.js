@@ -10,18 +10,19 @@ export const WebMapView = (props) => {
   //Creating the map itself, should only be effected when center is changed. 
   useEffect(
     () => {
+      
       // lazy load the required ArcGIS API for JavaScript modules and CSS
       loadModules(['esri/Map', 'esri/views/MapView', "esri/Graphic", "esri/geometry/Circle",
       "esri/layers/GraphicsLayer"], { css: true })
         .then(([ArcGISMap, MapView, Graphic, Circle,GraphicsLayer]) => {
           const map = new ArcGISMap({
-            basemap: 'satellite'
+            basemap: 'topo'
           });
            // load the map view at the ref's DOM node
            const view = new MapView({
             container: mapRef.current,
             map: map,
-            center: [props.longitude, props.latitude],
+            center: [props.fullCoordinates.longitude, props.fullCoordinates.latitude],
             zoom: 11
           });
 
@@ -39,7 +40,7 @@ export const WebMapView = (props) => {
   
           //First circle
           var circleOuter = new Circle({
-            center: [props.longitude, props.latitude],
+            center: [props.fullCoordinates.longitude, props.fullCoordinates.latitude],
             type: "polygon",
             radiusUnit: "kilometers",
             radius: 9
@@ -52,7 +53,7 @@ export const WebMapView = (props) => {
   
           //Middle circle of the explosion
           var circleMiddle = new Circle({
-            center: [props.longitude, props.latitude],
+            center: [props.fullCoordinates.longitude, props.fullCoordinates.latitude],
             type: "polygon",
             radiusUnit: "kilometers",
             radius: 5
@@ -64,7 +65,7 @@ export const WebMapView = (props) => {
           });
   
           var circleInner = new Circle({
-            center: [props.longitude, props.latitude],
+            center: [props.fullCoordinates.longitude, props.fullCoordinates.latitude],
             type: "polygon",
             radiusUnit: "kilometers",
             radius: 3.2
@@ -75,6 +76,8 @@ export const WebMapView = (props) => {
             symbol: simpleFillSymbol
           });
 
+          //ok logic, could be better.
+          
           //Insert bad logic here, gotta fix later
           if(props.isOuterCircle === true){
             view.graphics.add(outerGraphic);
@@ -85,9 +88,16 @@ export const WebMapView = (props) => {
           if(props.isInnerCircle === true){
             view.graphics.add(innerGraphic);
           }
+
+          return () => {
+            if (view) {
+              // destroy the map view
+              view.container = null;
+            }
+          }
           
         });
-    }, [props.longitude,props.latitude, props.isOuterCircle, props.isMiddleCircle, props.isInnerCircle],
+    }, [props.fullCoordinates, props.isOuterCircle, props.isMiddleCircle, props.isInnerCircle],
   );
 
   

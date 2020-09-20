@@ -14,8 +14,7 @@ import './App.css';
 
 const App = (props) => {
 
-  const [longitude, setLongitude] = useState(-117.426392);
-  const [latitude, setLatitude] = useState(33.930370);
+  const [coordinates, setCoordinates] = useState({longitude:-117.426392, latitude: 33.930370});
 
   const[outerCircle, setOuterCircle] = useState(true);
   const[middleCircle, setMiddleCircle] = useState(true);
@@ -23,8 +22,7 @@ const App = (props) => {
 
   const viewOuterCircle = () =>{
     setOuterCircle(!outerCircle);
-    console.log(outerCircle);
-    console.log("clicked viewOuterCircle! ")
+   
   }
 
   const viewMiddleCircle = () =>{
@@ -35,9 +33,12 @@ const App = (props) => {
     setInnerCircle(!innerCircle);
   }
 
-  const setCoordinates = (longCoor, latCoor) =>{
-    setLongitude(newLong => newLong = longCoor);
-    setLatitude(newLat => newLat = latCoor);
+  const setLocation = (longCoor, latCoor) =>{
+    setCoordinates(prevCoordinates => ({
+      longitude: longCoor,
+      latitude: latCoor
+    }));
+    
   }
 
 
@@ -51,7 +52,7 @@ const App = (props) => {
 <Container>
       <WebMapView 
       isOuterCircle = {outerCircle} isMiddleCircle = {middleCircle} isInnerCircle = {innerCircle}
-      longitude = {longitude} latitude = {latitude}
+      fullCoordinates = {coordinates}
       />
 </Container>
 
@@ -61,7 +62,7 @@ const App = (props) => {
 <Container className = "interactiveContainer">
   <Row>
       <Col md = "6">
-      <InputCoordinates setCoordinates = {setCoordinates} />
+      <InputCoordinates setCoordinates = {setLocation} />
       </Col>
       <Col md = "6">
       <DistanceButtons isOuterCircleMethod = {viewOuterCircle} isMiddleCircleMethod = {viewMiddleCircle}

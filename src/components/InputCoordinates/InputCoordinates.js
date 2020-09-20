@@ -22,7 +22,7 @@ const InputCoordinates = (props) => {
   const { register, handleSubmit } = useForm();
   const onSubmit = data =>{
     //retrieving the props functions to push information to the WebMapView file
-    props.setCoordinates(data.longCoor, data.latCoor);
+    props.setCoordinates(Number(data.longCoor), Number(data.latCoor));
   } 
 
 return (
